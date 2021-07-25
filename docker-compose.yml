@@ -1,0 +1,13 @@
+services:
+  metricbeat:
+    image: ${METRICBEAT_IMAGE}
+    container_name: metricbeat
+    network_mode: host
+    volumes:
+      - ./metricbeat.docker.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - ./modules.d:/usr/share/metricbeat/modules.d:ro
+
+      # system module
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro

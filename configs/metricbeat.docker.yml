@@ -1,0 +1,9 @@
+metricbeat.config:
+  modules:
+    path: ./modules.d/*.yml
+    reload.enabled: false
+
+output.elasticsearch:
+  hosts: '${ELASTICSEARCH_HOSTS:localhost:9200}'
+  username: '${ELASTICSEARCH_USERNAME:}'
+  password: '${ELASTICSEARCH_PASSWORD:}'
