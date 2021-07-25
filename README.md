@@ -11,7 +11,7 @@ writable by the owner. Run this command to correct permissions.
 
 ```bash
 # chown -R 1000:1000 ./configs
-# chmod go-w ./configs
+# chmod -R go-w ./configs
 ```
 
 ## Environment Variables
