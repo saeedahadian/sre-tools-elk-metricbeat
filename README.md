@@ -10,8 +10,8 @@ should be owned by the uid=1000 (`root` or `adminstrator`) and be only
 writable by the owner. Run this command to correct permissions.
 
 ```bash
-# chown -R 1000:1000 ./configs
-# chmod -R go-w ./configs
+chown -R 1000:1000 ./configs
+chmod -R go-w ./configs
 ```
 
 ## Environment Variables
