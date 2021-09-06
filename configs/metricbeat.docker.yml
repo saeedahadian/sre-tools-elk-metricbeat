@@ -1,9 +1,27 @@
 metricbeat.config:
   modules:
     path: ./modules.d/*.yml
-    reload.enabled: false
+    reload.enabled: true
+    reload.period: 10s
+
+setup.kibana:
+  host: "${KIBANA_HOST:10.1.19.1:9201}"
+  protocol: "https"
+  username: "${KIBANA_USERNAME}"
+  password: "${KIBANA_PASSWORD}"
+  ssl:
+    enabled: true
+    certificate_authorities: ["${CERTS_DIR}/ca/ca.crt"]
+    certificate: "${CERTS_DIR}/kib/kib.crt"
+    key: "${CERTS_DIR}/kib/kib.key"
+
+setup.dashboards.enbaled: false
 
 output.elasticsearch:
-  hosts: '${ELASTICSEARCH_HOSTS:localhost:9200}'
-  username: '${ELASTICSEARCH_USERNAME:}'
-  password: '${ELASTICSEARCH_PASSWORD:}'
+  hosts: '${ELASTICSEARCH_HOST:localhost:9200}'
+  username: '${ELASTICSEARCH_USERNAME}'
+  password: '${ELASTICSEARCH_PASSWORD}'
+  ssl:
+    certificate_authorities: ["${CERTS_DIR}/ca/ca.crt"]
+    certificate: "${CERTS_DIR}/master-es-01/master-es-01.crt"
+    key: "${CERTS_DIR}/master-es-01/master-es-01.key"

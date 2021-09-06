@@ -1,13 +1,17 @@
+version: '3.8'
+
 services:
   metricbeat:
-    image: ${METRICBEAT_IMAGE}
+    image: beats/metricbeat:${VERSION}
     container_name: metricbeat
     network_mode: host
-    environment:
-      - ELASTICSEARCH_HOSTS=${ELASTICSEARCH_HOSTS}
-      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
-      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}        
+    env_file: .env
+    deploy:
+      resources:
+        limits:
+          memory: 2G
     volumes:
+      - certs:$CERTS_DIR
       - ./configs/metricbeat.docker.yml:/usr/share/metricbeat/metricbeat.yml:ro
       - ./configs/modules.d:/usr/share/metricbeat/modules.d:ro
 
@@ -15,3 +19,11 @@ services:
       - /proc:/hostfs/proc:ro
       - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
       - /:/hostfs:ro
+
+      # docker module
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  certs:
+    external: true
+    name: elastic-stack-certs
