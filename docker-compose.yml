@@ -9,7 +9,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 300M
     volumes:
       - certs:$CERTS_DIR
       - ./configs/metricbeat.docker.yml:/usr/share/metricbeat/metricbeat.yml:ro
