@@ -20,6 +20,7 @@ services:
       - /proc:/hostfs/proc:ro
       - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
       - /:/hostfs:ro
+      #- /var/run/dbus:/var/run/dbus:ro
 
       # docker module
       - /var/run/docker.sock:/var/run/docker.sock:ro
