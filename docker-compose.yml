@@ -6,6 +6,7 @@ services:
     container_name: metricbeat
     network_mode: host
     env_file: .env
+    command: ["--strict.perms=false", "-system.hostfs=/hostfs", "-e"]
     deploy:
       resources:
         limits:
