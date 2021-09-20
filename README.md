@@ -67,3 +67,17 @@ Use one of `.env.sample` or `.env.fish.sample` files to create your own environm
 # Only for fish shell:
 . .env.fish
 ```
+
+## Visiblity of Host Processes Inside the Container
+
+When running Metricbeat container, it doesn't get started with `-system.hostfs=/hostfs` flag and that results in container not being able to see host processes. We need to add this flag in the command field of compose file.
+
+```bash
+services:
+    metricbeat:
+       image: beats/metricbeat:${VERSION}
+       container_name: metricbeat
+       network_mode: host
+       env_file: .env
+       command: ["--strict.perms=false", "-system.hostfs=/hostfs", "-e"]
+```
