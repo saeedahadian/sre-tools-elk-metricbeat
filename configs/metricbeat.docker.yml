@@ -7,21 +7,20 @@ metricbeat.config:
 setup.kibana:
   host: "${KIBANA_HOST:10.1.19.1:9201}"
   protocol: "https"
-  username: "${KIBANA_USERNAME}"
-  password: "${KIBANA_PASSWORD}"
+  username: "metricbeat_setup"
+  password: "${METRICBEAT_SETUP_PASSWORD}"
   ssl:
     enabled: true
     certificate_authorities: ["${CERTS_DIR}/ca/ca.crt"]
-    certificate: "${CERTS_DIR}/kib/kib.crt"
-    key: "${CERTS_DIR}/kib/kib.key"
+    verification_mode: "certificate"
 
 setup.dashboards.enbaled: false
 
 output.elasticsearch:
   hosts: '${ELASTICSEARCH_HOST:localhost:9200}'
-  username: '${ELASTICSEARCH_USERNAME}'
-  password: '${ELASTICSEARCH_PASSWORD}'
+  protocol: "https"
+  username: 'metricbeat_writer'
+  password: '${METRICBEAT_WRITER_PASSWORD}'
   ssl:
-    certificate_authorities: ["${CERTS_DIR}/ca/ca.crt"]
-    certificate: "${CERTS_DIR}/master-es-01/master-es-01.crt"
-    key: "${CERTS_DIR}/master-es-01/master-es-01.key"
+    certificate_authorities: ["${CERTS_DIR}/kibana/elasticsearch-ca.pem"]
+    verification_mode: "certificate"

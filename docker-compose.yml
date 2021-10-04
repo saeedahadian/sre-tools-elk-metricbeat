@@ -28,4 +28,4 @@ services:
 volumes:
   certs:
     external: true
-    name: elastic-stack-certs
+    name: elastic-certs
