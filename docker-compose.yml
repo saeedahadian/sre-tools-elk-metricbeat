@@ -7,6 +7,7 @@ services:
     network_mode: host
     env_file: .env
     command: ["--strict.perms=false", "-system.hostfs=/hostfs", "-e"]
+    restart: unless-stopped
     deploy:
       resources:
         limits:
